@@ -1,17 +1,12 @@
 class Transaction {
-    amount: number;
-    date: Date;
-    constructor(amount: number, date: Date){
+    constructor(amount, date){
         this.amount = amount;
         this.date = date;
     }
 }
 
 class Customer {
-    name: string;
-    id: string;
-    transactions: Transaction[];
-    constructor(name: string, id: string){
+    constructor(name, id){
         this.name = name;
         this.id = id;
         this.transactions = [];
@@ -37,7 +32,7 @@ class Customer {
     }
 
     // Method 5
-    addTransactions(amount: number){
+    addTransactions(amount){
         if (amount < 0 && this.getBalance() < Math.abs(amount)) {
             return false;
         }
@@ -50,9 +45,7 @@ class Customer {
 }
 
 class Branch {
-    name: string;
-    customers: Customer[];
-    constructor (name: string){
+    constructor (name){
         this.name = name;
         this.customers = [];
     }
@@ -68,7 +61,7 @@ class Branch {
     }
 
     // Method 3
-    addCustomer(customer: Customer){
+    addCustomer(customer){
         if(!this.customers.includes(customer)){
             this.customers.push(customer);
             console.log(`Customer ${customer.name} with ID: ${customer.id} added successfully.`);
@@ -80,7 +73,7 @@ class Branch {
     }
 
     // Method 4
-    addCustomerTransaction(customerId: string, amount: number){
+    addCustomerTransaction(customerId, amount){
         let customer = this.customers.find(customer => customer.id === customerId);
         if (customer){
             customer.addTransactions(amount);
@@ -92,15 +85,13 @@ class Branch {
 }
 
 class Bank {
-    name: string;
-    branches: Branch[];
-    constructor (name: string){
+    constructor (name){
         this.name = name;
         this.branches = [];
     }
 
     // Method 1
-    addBranch(branch: Branch){
+    addBranch(branch){
         if (!this.branches.includes(branch)) {
             this.branches.push(branch);
             console.log(`${branch.name} added successfully.`);
@@ -112,7 +103,7 @@ class Bank {
     }
 
     // Method 2
-    addCustomer(branch: Branch, customer: Customer){
+    addCustomer(branch, customer){
         let existingCustomer = this.branches.some(b => b.customers.some(c => c.id === customer.id));
         if (existingCustomer) {
             console.log(`Customer ${customer.name} with ID: ${customer.id}, already exists in another branch.`);
@@ -127,7 +118,7 @@ class Bank {
     }
 
     // Method 3
-    addCustomerTransaction(branch: Branch, customerId: string, amount: number){
+    addCustomerTransaction(branch, customerId, amount){
         if (this.branches.includes(branch)) {
             return branch.addCustomerTransaction(customerId, amount);
           }else{
@@ -136,7 +127,7 @@ class Bank {
     }
 
     // Method 4
-    findBranchByName(branchName: string){
+    findBranchByName(branchName){
         let branch = this.branches.find(branch => branch.name === branchName);
         if (branch){
             console.log(`${branchName} is existed.`);
@@ -148,12 +139,12 @@ class Bank {
     }
 
     // Method 5
-    checkBranch(branch: Branch){
+    checkBranch(branch1){
         return this.branches.includes(branch);
     }
 
     // Method 6
-    listCustomers(branch: Branch, includeTransactions: boolean){
+    listCustomers(branch, includeTransactions){
         const customers = branch.getCustomers();
         if (this.branches.includes(branch)) {
             let output = `Customer details for branch ${branch.name}\n`;
@@ -178,9 +169,9 @@ class Bank {
 const arizonaBank = new Bank("Arizona")
 const westBranch = new Branch("West Branch")
 const sunBranch = new Branch("Sun Branch")
-const customer1 = new Customer("John", "1")
-const customer2 = new Customer("Anna", "2")
-const customer3 = new Customer("John", "3")
+const customer1 = new Customer("John", 1)
+const customer2 = new Customer("Anna", 2)
+const customer3 = new Customer("John", 3)
 
 arizonaBank.addBranch(westBranch)
 arizonaBank.addBranch(sunBranch)

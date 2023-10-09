@@ -17,7 +17,7 @@ class Customer {
         this.transactions = [];
     }
     // Method 1
-    getName(): String {
+    getName(): string {
         return this.name;
       }
     
@@ -101,17 +101,15 @@ class Bank {
     }
 
     // Method 1
-    addBranch(branch: Branch)
-    {
-        if (!this.branches.includes(branch))
-         {
+    addBranch(branch: Branch) {
+        if (!this.branches.includes(branch)) {
             this.branches.push(branch);
             console.log(`${branch.name} added successfully.`);
             return true;
 
           }
-          else 
-          {
+     
+          else {
               console.log(`${branch.name} already exists.`);
               return false;
           } 
